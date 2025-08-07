@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Request Demo - Finora{% endblock %}
+
+{% block navigation %}{% endblock %}
+
+{% block content %}
+<!-- Demo Request Form Section -->
+<section class="form-section">
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-content">
+                <h1 class="form-title">Request a Demo</h1>
+                <p class="form-description">
+                    See how Finora can transform your pricing strategy with AI-powered intelligence.
+                </p>
+                
+                <form id="demoForm" class="demo-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" class="form-input3" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" class="form-input3" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Business Email *</label>
+                            <input type="email" id="email" name="email" class="form-input3" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input3">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company" class="form-label">Company Name *</label>
+                            <input type="text" id="company" name="company" class="form-input3" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="jobTitle" class="form-label">Job Title *</label>
+                            <input type="text" id="jobTitle" name="jobTitle" class="form-input3" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="companySize" class="form-label">Company Size *</label>
+                        <select id="companySize" name="companySize" class="form-select" required>
+                            <option value="">Select company size</option>
+                            <option value="1-10">1-10 employees</option>
+                            <option value="11-50">11-50 employees</option>
+                            <option value="51-200">51-200 employees</option>
+                            <option value="201-1000">201-1000 employees</option>
+                            <option value="1000+">1000+ employees</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="industry" class="form-label">Industry *</label>
+                        <select id="industry" name="industry" class="form-select" required>
+                            <option value="">Select your industry</option>
+                            <option value="retail">Retail & E-commerce</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="technology">Technology</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="finance">Finance</option>
+                            <option value="automotive">Automotive</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="form-label">Tell us about your pricing challenges</label>
+                        <textarea id="message" name="message" class="form-textarea2" placeholder="Describe your current pricing strategy and what you'd like to improve..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-submit">
+                        Request Demo
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Modal -->
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="success-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20,6 9,17 4,12"></polyline>
+                </svg>
+            </div>
+            <h3>Demo Request Submitted!</h3>
+            <p>Thank you for your interest in Finora. Our team will contact you within 24 hours to schedule your personalized demo.</p>
+        </div>
+        <button onclick="closeModal()" class="btn btn-primary">Close</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/demo.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Shopify Account Login</title>
+    <style>
+        body {
+            background: radial-gradient(ellipse at center, #182032 30%, #0E1220 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            color: #eaf6ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: white;
+            /* text-shadow: 0 3px 26px #1fd1f9a0; */
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        form {
+            background: rgba(29, 36, 56, 0.93);
+            /* box-shadow: 0 6px 36px 0 #0bc6e8aa, 0 2px 4px 0 #080c16; */
+            border-radius: 15px;
+            padding: 36px 44px;
+            width: 100%;
+            max-width: 460px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 6px 4px;
+            font-size: 1.05rem;
+            color: #93f7e3;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            background: rgba(40, 63, 90, 0.73);
+            color: #eaf6ff;
+            font-size: 1rem;
+            /* box-shadow: 0 1px 10px 0 #1fd1f933;
+            transition: outline 0.2s, box-shadow 0.2s; */
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: 2px solid #4bd5f9cc;
+            /* box-shadow: 0 2px 18px 0 #13b0e763; */
+            background: rgba(40, 63, 90, 0.85);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-top: 14px;
+            color: #93f7e3;
+            font-size: 0.95rem;
+            user-select: none;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        button[type="submit"] {
+            margin-top: 26px;
+            background: linear-gradient(90deg, #1fd1f9 0%, #b38cff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 0.85em 0;
+            /* box-shadow: 0 2px 24px 0 #70eaff90; */
+            cursor: pointer;
+            letter-spacing: 0.75px;
+            /* transition: background 0.22s, box-shadow 0.22s, color 0.17s; */
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #0bc6e8 0%, #b79aff 100%);
+            /* box-shadow: 0 4px 32px 0 #2edcffb9; */
+            color: #182032;
+        }
+
+        a.back-button {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 0.8em 2.2em;
+            background: linear-gradient(90deg, #1fd1f9 0%, #b38cff 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 0.7px;
+            /* box-shadow: 0 2px 24px 0 #70eaff74;
+            transition: background 0.19s, box-shadow 0.19s, color 0.19s; */
+            text-align: center;
+            max-width: 460px;
+            width: 100%;
+        }
+
+        a.back-button:hover {
+            background: linear-gradient(90deg, #0bc6e8 0%, #b79aff 100%);
+            /* box-shadow: 0 4px 32px 0 #2edcffd1; */
+            color: #181f2f;
+        }
+
+        @media (max-width: 620px) {
+            body {
+                padding: 30px 12px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 22px;
+            }
+
+            form {
+                padding: 28px 20px;
+                max-width: 100%;
+            }
+
+            button[type="submit"], a.back-button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopify Account Login</h1>
+    <form method="post" >
+        <label for="shopify_domain">Shopify Domain</label>
+        <input type="text" id="shopify_domain" name="shopify_domain" placeholder="your-store.myshopify.com" required />
+
+        <label for="email">Gmail</label>
+        <input type="email" id="email" name="email" placeholder="your.email@gmail.com" required />
+
+        <label for="password">Shopify Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your Shopify password" required />
+
+        <div class="checkbox-container">
+            <input type="checkbox" id="remember_me" name="remember_me" />
+            <label for="remember_me">Remember Me</label>
+        </div>
+
+        <button type="submit">Log In</button>
+    </form>
+
+    <a href="{{ url_for('dashboard') }}" class="back-button">Back to Dashboard</a>
+</body>
+</html>

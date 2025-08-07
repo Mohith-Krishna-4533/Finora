@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Finora{% endblock %}
+
+{% block navigation %}
+<nav class="nav">
+    <a href="{{ url_for('optimize') }}" class="nav-link">Run Price Optimization</a>
+    <a href="{{ url_for('analytics') }}" class="nav-link">Analytics</a>
+    <a href="{{ url_for('competitor_analysis') }}" class="nav-link">Competitor Analysis</a>
+    <a href="{{ url_for('full_report_form') }}" class="nav-link">Generate Report</a>
+    <a href="{{ url_for('shopify') }}" class="nav-link">Shopify</a>
+</nav>
+{% endblock %}
+
+{% block content %}
+<!-- Dashboard Section -->
+<section class="dashboard-section">
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Welcome back, Buddy !</h1>
+            <p class="dashboard-description">Here's what's happening with your pricing optimization today.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon cyan">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number" data-target="1247">0</h3>
+                    <p class="stat-label">Total Products</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number" data-target="89">0</h3>
+                    <p class="stat-label">Active Optimizations</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon cyan">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number" data-target="23.5" data-suffix="%">0%</h3>
+                    <p class="stat-label">Revenue Increase</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+                    </svg>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number" data-target="15">0</h3>
+                    <p class="stat-label">Competitors Tracked</p>
+                </div>
+            </div>
+        </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h2 class="section-title">Quick Actions</h2>
+        <div class="actions-grid">
+
+            <a href="{{ url_for('optimize') }}" class="action-card">
+                <div class="action-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
+                </div>
+                <h3>Run Price Optimization</h3>
+                <p>Analyze and optimize pricing for all products</p>
+            </a>
+
+            <a href="{{ url_for('analytics') }}" class="action-card">
+                <div class="action-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 20V10M12 20V4M6 20v-6"/>
+                    </svg>
+                </div>
+                <h3>View Analytics</h3>
+                <p>Detailed performance metrics and insights</p>
+            </a>
+
+            <a href="{{ url_for('competitor_analysis') }}" class="action-card">
+                <div class="action-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+                    </svg>
+                </div>
+                <h3>Competitor Analysis</h3>
+                <p>Monitor competitor pricing changes</p>
+            </a>
+
+            <a href="{{ url_for('full_report_form') }}" class="action-card">
+                <div class="action-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10,9 9,9 8,9"/>
+                    </svg>
+                </div>
+                <h3>Generate Report</h3>
+                <p>Create detailed pricing performance report</p>
+            </a>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

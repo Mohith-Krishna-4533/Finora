@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Competitor Price Analysis</title>
+    <style>
+        body {
+            background: radial-gradient(ellipse at center, #182032 30%, #0E1220 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            color: #eaf6ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px 40px 20px;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 3px 26px #1fd1f9a0;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        form {
+            background: rgba(29, 36, 56, 0.93);
+            /* box-shadow: 0 6px 36px 0 #0bc6e8aa, 0 2px 4px 0 #080c16; */
+            border-radius: 15px;
+            padding: 22px 32px;
+            margin-bottom: 35px;
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        form input[type="text"] {
+            flex-grow: 1;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            background: rgba(40, 63, 90, 0.73);
+            color: #eaf6ff;
+            font-size: 1rem;
+            /* box-shadow: 0 1px 10px 0 #1fd1f933; */
+            /* transition: outline 0.2s, box-shadow 0.2s; */
+        }
+
+        form input[type="text"]:focus {
+            outline: 2px solid #4bd5f9cc;
+            /* box-shadow: 0 2px 18px 0 #13b0e763; */
+        }
+
+        form button[type="submit"] {
+            background: linear-gradient(90deg, #1fd1f9 0%, #b38cff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.7em 2em;
+            /* box-shadow: 0 2px 24px 0 #70eaff90; */
+            cursor: pointer;
+            letter-spacing: 0.7px;
+            /* transition: background 0.2s, box-shadow 0.2s, color 0.2s; */
+            flex-shrink: 0;
+        }
+
+        form button[type="submit"]:hover {
+            background: linear-gradient(90deg, #0bc6e8 0%, #b79aff 100%);
+            /* box-shadow: 0 4px 32px 0 #2edcffb9; */
+            color: #182032;
+        }
+
+        /* Flash message styles */
+        .flash-success, .flash-warning, .flash-error {
+            max-width: 480px;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .flash-success {
+            background: rgba(25, 103, 93, 0.23);
+            color: #7dffc5;
+        }
+
+        .flash-warning {
+            background: rgba(115, 81, 4, 0.23);
+            color: #ffdba3;
+        }
+
+        .flash-error {
+            background: rgba(131, 14, 39, 0.23);
+            color: #ffb5d2;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 510px;
+            background: rgba(29, 36, 56, 0.92);
+            border-radius: 16px;
+            /* box-shadow: 0 6px 36px 0 #0bc6e8aa, 0 2px 4px 0 #080c16; */
+            overflow: hidden;
+            color: #eaf6ff;
+            margin-bottom: 40px;
+        }
+
+        thead {
+            background: linear-gradient(90deg, #1fd1f9 0%, #b38cff 100%);
+        }
+
+        thead th {
+            padding: 14px 20px;
+            font-weight: 700;
+            color: #181f2f;
+            text-align: left;
+            letter-spacing: 0.7px;
+            font-size: 1rem;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        tbody tr:hover {
+            background: rgba(32, 51, 77, 0.48);
+        }
+
+        tbody td {
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            vertical-align: middle;
+        }
+
+        tbody td.price {
+            font-weight: 600;
+            color: #b38cff;
+        }
+
+        tbody td a {
+            color: #76eef4;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        tbody td a:hover {
+            color: #a0cfff;
+            text-decoration: underline;
+        }
+
+        p.no-data {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #ffb5d2;
+            max-width: 510px;
+            margin-bottom: 40px;
+        }
+
+        /* Back to Dashboard button */
+        a.back-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 0.7em 2.2em;
+            background: linear-gradient(90deg, #1fd1f9 0%, #b38cff 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 0.7px;
+            /* box-shadow: 0 2px 24px 0 #70eaff74; */
+            /* transition: background 0.19s, box-shadow 0.19s, color 0.19s; */
+            align-self: center;
+        }
+
+        a.back-button:hover {
+            background: linear-gradient(90deg, #0bc6e8 0%, #b79aff 100%);
+            /* box-shadow: 0 4px 32px 0 #2edcffd1; */
+            color: #181f2f;
+        }
+
+        @media (max-width: 620px) {
+            body {
+                padding: 20px 12px 30px 12px;
+            }
+
+            form {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            form input[type="text"], form button[type="submit"] {
+                width: 100%;
+            }
+
+            table, p.no-data {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Competitor Price Analysis</h1>
+
+    <form method="post" action="{{ url_for('competitor_analysis') }}">
+        <input type="text" name="product" placeholder="Enter product name" value="{{ query }}" autocomplete="off" />
+        <button type="submit">Search</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if products %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price (USD)</th>
+                    <th>Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in products %}
+                <tr>
+                    <td><a href="{{ item.link }}" target="_blank" rel="noopener noreferrer">{{ item.product_name }}</a></td>
+                    <td class="price">${{ "%.2f"|format(item.price) }}</td>
+                    <td>{{ item.source }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif query %}
+        <p class="no-data">No competitor data found for &quot;{{ query }}&quot;.</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}" class="back-button">Back to Dashboard</a>
+</body>
+</html>

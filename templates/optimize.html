@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Price Optimization</title>
+    <style>
+        body {
+            background: radial-gradient(ellipse at center, #182032 30%, #0E1220 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', Arial, sans-serif;
+            color: #eaf6ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 44px;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 3px 26px #1fd1f9a0;
+            margin-bottom: 16px;
+            letter-spacing: .5px;
+        }
+
+        form {
+            background: rgba(29, 36, 56, 0.93);
+            /* box-shadow: 0 6px 36px 0 #0bc6e8aa, 0 2px 4px 0 #080c16; */
+            border-radius: 15px;
+            padding: 34px 38px 24px 38px;
+            margin-bottom: 38px;
+            margin-top: 18px;
+            min-width: 310px;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        label {
+            margin: 7px 0 2px 2px;
+            font-size: 1.02rem;
+            color: #93f7e3;
+        }
+
+        input[type="text"] {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 13px;
+            width: 92%;
+            margin-bottom: 14px;
+            margin-top: 2px;
+            background: rgba(40, 63, 90, 0.73);
+            color: #eaf6ff;
+            font-size: 1rem;
+            /* box-shadow: 0 1px 10px 0 #1fd1f933; */
+            /* transition: outline 0.2s, box-shadow 0.2s; */
+        }
+
+        input[type="text"]:focus {
+            outline: 2px solid #4bd5f9cc;
+            /* box-shadow: 0 2px 18px 0 #13b0e763; */
+        }
+
+        button[type="submit"] {
+            margin-top: 18px;
+            background: linear-gradient(90deg, #1fd1f9 0%, #b38cff 100%);
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.7em 2.3em;
+            /* box-shadow: 0 2px 24px 0 #70eaff90; */
+            cursor: pointer;
+            letter-spacing: .7px;
+            /* transition: background 0.22s, box-shadow 0.22s, color 0.17s; */
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #0bc6e8 0%, #b79aff 100%);
+            /* box-shadow: 0 4px 32px 0 #2edcffb9; */
+            color: #182032;
+        }
+
+        /* Feedback message styles */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 1em 0 1.3em 0;
+            max-width: 430px;
+        }
+
+        li {
+            background: rgba(63, 14, 39, 0.17);
+            border-radius: 7px;
+            color: #ffb5d2;
+            font-size: 1.04rem;
+            margin-bottom: 6px;
+            padding: 10px 16px;
+        }
+        .success {
+            background: rgba(25, 103, 93, 0.23);
+            color: #7dffc5;
+        }
+        .warning {
+            background: rgba(115, 81, 4, 0.23);
+            color: #ffdba3;
+        }
+        .error {
+            background: rgba(131, 14, 39, 0.23);
+            color: #ffb5d2;
+        }
+
+        /* Data card style */
+        .card {
+            background: rgba(29, 36, 56, 0.92);
+            border-radius: 16px;
+            /* box-shadow: 0 6px 36px 0 #0bc6e8aa, 0 2px 4px 0 #080c16; */
+            padding: 32px 40px 24px 40px;
+            margin-bottom: 36px;
+            max-width: 510px;
+        }
+
+        h2, h3, h4 {
+            margin-top: 1.1em;
+            margin-bottom: 0.5em;
+            color: #a89eff;
+            letter-spacing: 0.7px;
+        }
+        h2 {
+            font-size: 1.25rem;
+            color: #93f7e3;
+        }
+        h3 {
+            color: #41dcff;
+            font-size: 1.12rem;
+        }
+        h4 {
+            color: #b38cff;
+            font-size: 1.05rem;
+        }
+
+        p {
+            font-size: 1.05rem;
+            margin: .4em 0 .7em 0;
+        }
+        strong {
+            color: #b38cff;
+            font-size: 1.12em;
+        }
+
+        img {
+            margin: 1em 0 1em 0;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 12px;
+            /* box-shadow: 0 4px 25px 0 #2edcff80; */
+            background: #191c2a;
+        }
+
+        .card ul, .card ul li {
+            background: unset;
+            color: #eaf6ff;
+            font-size: 0.98rem;
+            padding: 0;
+        }
+        .card ul {
+            margin-top: 0;
+        }
+        .card ul li {
+            background: rgba(32, 51, 77, 0.68);
+            border-radius: 7px;
+            margin: 4px 0;
+            padding: 7px 13px;
+            color: #eaf6ff;
+        }
+
+        /* "No data" message */
+        .nodata-message {
+            color: #ffb5d2;
+            font-size: 1.13em;
+            margin: 1.5em 0;
+            background: rgba(63, 4, 37, 0.17);
+            border-radius: 10px;
+            padding: 15px 22px 13px 22px;
+            font-weight: 500;
+            max-width: 440px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 1.2em;
+            padding: 0.7em 2em;
+            background: linear-gradient(90deg, #1fd1f9 0%, #b38cff 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: .7px;
+            transition: background 0.19s, box-shadow 0.19s;
+            /* box-shadow: 0 2px 24px 0 #70eaff74; */
+        }
+
+        a:hover {
+            background: linear-gradient(90deg, #0bc6e8 0%, #b79aff 100%);
+            /* box-shadow: 0 4px 32px 0 #2edcffd1; */
+            color: #181f2f;
+        }
+
+        @media (max-width: 620px) {
+            .card, form {
+                padding: 17px 4vw 12px 4vw;
+                min-width: unset;
+                max-width: 97vw;
+            }
+            h1 {
+                font-size: 1.35rem;
+            }
+            h2, h3, h4 {
+                font-size: 0.94rem !important;
+            }
+            img {
+                max-width: 92vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Price Optimization</h1>
+
+    <!-- Search Form -->
+    <form method="post" action="{{ url_for('optimize_prices') }}">
+        <label for="category">Product Category:</label>
+        <input type="text" id="category" name="category" value="{{ selected_category }}" placeholder="Enter category" />
+        <br />
+        <label for="product_name">OR Product Name:</label>
+        <input type="text" id="product_name" name="product_name" value="{{ product_name_query }}" placeholder="Enter product name" />
+        <br />
+        <button type="submit">Search & Optimize</button>
+    </form>
+
+    <!-- Feedback Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Optimization Results -->
+    {% if optimized_data %}
+        <h2>Optimization for: {{ optimized_data.name }}</h2>
+        {% if optimized_data.current_price %}
+            <p>Current Average Price: ${{ optimized_data.current_price }}</p>
+        {% else %}
+            <p>Current price data not available.</p>
+        {% endif %}
+        {% if optimized_data.optimized_price %}
+            <p><strong>Suggested Optimized Price: ${{ optimized_data.optimized_price }}</strong></p>
+        {% endif %}
+
+        <h3>Forecasted Sales for Next 30 Days</h3>
+        <ul>
+            {% for i in range(optimized_data.forecast_next_30_days|length) %}
+                <li>Day {{ i+1 }}: {{ optimized_data.forecast_next_30_days[i] | round(2) }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No data to display. Please try searching with different category or product name.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+</body>
+</html>

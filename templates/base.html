@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}finora - AI-Powered Pricing Intelligence{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"></polygon>
+                    </svg>
+                </div>
+                <span class="logo-text">Finora</span>
+            </div>
+            
+            {% block navigation %}
+            <nav class="nav">
+                <a href="{{ url_for('home') }}#features" class="nav-link">Features</a>
+                <a href="{{ url_for('home') }}#how-it-works" class="nav-link">How It Works</a>
+                <a href="{{ url_for('home') }}#reviews" class="nav-link">Reviews</a>
+            </nav>
+            {% endblock %}
+            
+            <div class="header-buttons">
+                {% if session.user_id %}
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline">Dashboard</a>
+                    <button onclick="logout()" class="btn btn-primary">Logout</button>
+                {% else %}
+                    <a href="{{ url_for('home') }}" class="btn btn-outline">Home</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-outline">Login</a>
+                    <a href="{{ url_for('signup') }}" class="btn btn-primary">Sign Up</a>
+                {% endif %}
+            </div>
+        </header>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">
+                            {{ message }}
+                            <button onclick="this.parentElement.remove()" class="flash-close">&times;</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Main Content -->
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Base JavaScript -->
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
