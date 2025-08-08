@@ -16,8 +16,6 @@ import base64
 import requests
 import serpapi
 import numpy as np
-import openai
-
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
